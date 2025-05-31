@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>_varxin pop</title>
   <style>
     html, body {
@@ -11,6 +12,11 @@
       background-color: #000;
       overflow: hidden;
       font-family: sans-serif;
+      -webkit-touch-callout: none; /* ป้องกัน iOS กดค้าง */
+      -webkit-user-select: none;   /* ป้องกันเลือกข้อความใน iOS Safari */
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;           /* ป้องกันเลือกข้อความทั่วไป */
     }
 
     #popImage {
@@ -19,6 +25,10 @@
       object-fit: cover;
       cursor: pointer;
       display: block;
+      -webkit-user-drag: none;     /* ป้องกันลากรูปใน Safari */
+      user-drag: none;
+      -webkit-touch-callout: none; /* ป้องกัน iOS กดค้างบนรูป */
+      user-select: none;
     }
 
     #title {
@@ -30,6 +40,7 @@
       color: white;
       text-shadow: 2px 2px 6px black;
       z-index: 2;
+      user-select: none;
     }
 
     #counter {
@@ -41,13 +52,14 @@
       color: white;
       text-shadow: 2px 2px 8px black;
       z-index: 2;
+      user-select: none;
     }
   </style>
 </head>
 <body>
   <div id="title">_varxin pop</div>
   <div id="counter">0</div>
-  <img src="normal.jpg" id="popImage" alt="Rain" />
+  <img src="normal.jpg" id="popImage" alt="Rain" draggable="false" />
   <audio id="popSound" src="popcat.mp3" preload="auto"></audio>
 
   <script>
@@ -60,9 +72,7 @@
       image.src = "open.jpg";
       count++;
       counter.textContent = count;
-
-      // เล่นเสียง
-      popSound.currentTime = 0; // เริ่มใหม่ทุกครั้ง
+      popSound.currentTime = 0;
       popSound.play();
     }
 
@@ -75,6 +85,25 @@
 
     image.addEventListener('touchstart', pop);
     image.addEventListener('touchend', reset);
+
+    // ป้องกันกดคลิกขวาหรือกดค้างบนรูป
+    image.addEventListener('contextmenu', e => e.preventDefault());
+
+    // ป้องกันกดค้างบนรูปในมือถือ (long press)
+    let timer;
+    image.addEventListener('touchstart', () => {
+      timer = setTimeout(() => {}, 500); // ไม่ทำอะไรเลย แค่กันกดค้างขึ้นเมนู
+    });
+    image.addEventListener('touchend', () => {
+      clearTimeout(timer);
+    });
+
+    // ป้องกันการ zoom ด้วย gesture (optional)
+    window.addEventListener('touchmove', function(event) {
+      if (event.scale !== 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
   </script>
 </body>
 </html>
