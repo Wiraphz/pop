@@ -30,18 +30,16 @@
       width: min(720px, 92vw);
       background: rgba(255,255,255,0.9);
       border-radius: 28px;
-      padding: 44px 28px 68px;         /* กันไม่ให้ปุ่มชิดขอบล่าง */
+      padding: 44px 28px 68px;
       text-align: center;
       position: relative;
       z-index: 10;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       overflow: hidden;
-
-      /* จัดเลย์เอาต์ให้บาลานซ์ */
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: clamp(20px, 5vh, 40px);     /* ระยะห่างระหว่างหัวข้อและปุ่ม */
+      gap: clamp(20px, 5vh, 40px);
     }
 
     h1 {
@@ -51,12 +49,12 @@
 
     .buttons {
       display: flex;
-      gap: 18px;                       /* ห่างกำลังดี */
+      gap: 18px;
       justify-content: center;
       flex-wrap: wrap;
       padding-top: 2px;
       min-height: 72px;
-      padding-inline: 12px;            /* กันขอบซ้ายขวาเวลาโต */
+      padding-inline: 12px;
     }
 
     button {
@@ -66,13 +64,13 @@
       font-size: 18px;
       cursor: pointer;
       transition: transform 0.2s ease;
-      transform-origin: top center;    /* โตลงล่าง ไม่ไปชนหัวข้อ */
+      transform-origin: top center;
     }
 
     #loveBtn {
       background: linear-gradient(180deg, #ff4d88, #ff77a9);
       color: #fff;
-      transform: scale(1.08);          /* เริ่มใหญ่แบบพอดี */
+      transform: scale(1.08);
       box-shadow: 0 8px 18px rgba(255, 77, 136, 0.35);
     }
     #noBtn {
@@ -81,14 +79,50 @@
       border: 2px solid #ffd1e0;
     }
 
-    /* มือถือ: เพิ่มพื้นที่ล่างอีกนิด */
-    @media (max-width: 420px) {
-      .card { padding: 40px 20px 72px; }
-      .buttons { gap: 20px; }
+    /* ===== Modal Popup ===== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none; /* เปิดด้วย JS */
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(3px);
+    }
+    .modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 26px 22px;
+      width: min(500px, 90vw);
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+      color: #ff4d88;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 600;
+    }
+    .modal button {
+      margin-top: 20px;
+      background: linear-gradient(180deg, #ff4d88, #ff77a9);
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(255,77,136,0.35);
     }
   </style>
 </head>
 <body>
+  <!-- Popup -->
+  <div class="modal-backdrop" id="popup">
+    <div class="modal">
+      <div>เค้าทำมาง้อแฟนน๊าาาคั๊บบบบบ<br>โอ๋ๆดีกันนน 💖</div>
+      <button id="closePopup">ปิด</button>
+    </div>
+  </div>
+
   <!-- พื้นหลังรูป 20 รูป -->
   <div class="bg-container">
     <img src="1.jpg" alt=""><img src="2.jpg" alt=""><img src="3.jpg" alt="">
@@ -137,11 +171,19 @@
     }
   });
 
-  /* แก้ตรงนี้: กดแล้วไปหน้า love.html */
   loveBtn.addEventListener('click', () => {
     window.location.href = 'love.html';
   });
-</script>
 
+  // ===== Popup Logic =====
+  const popup = document.getElementById('popup');
+  const closePopup = document.getElementById('closePopup');
+  window.addEventListener('DOMContentLoaded', () => {
+    popup.style.display = 'flex';  // เปิด popup ตอนโหลดเสร็จ
+  });
+  closePopup.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+  </script>
 </body>
 </html>
