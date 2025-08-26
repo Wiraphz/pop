@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>เล่าเรื่องของเรา 💖</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; }
+    body {
+      font-family: "Prompt", sans-serif;
+      min-height:100vh;
+      display:flex;
+      flex-direction: column;   /* เรียง caption + ปุ่มเป็นแนวตั้ง */
+      align-items:center;
+      justify-content:flex-start;
+      background: url("12.jpg") center/cover no-repeat fixed;
+      position:relative;
+      color:#fff;
+    }
+
+    .caption {
+      margin-top: 24px;
+      margin-bottom: 16px;
+      font-size: clamp(14px, 3vw, 20px);
+      font-weight:500;
+      background: rgba(0,0,0,0.35);
+      padding: 6px 14px;
+      border-radius: 14px;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      text-align:center;
+    }
+
+    .next-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(180deg, #ff4d88, #ff77a9);
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(255,77,136,0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .next-btn:hover {
+      box-shadow: 0 8px 18px rgba(255,77,136,0.45);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="caption">
+    รูปแรกที่แฟนส่งมาให้เค้าาาา เลิฟเลยยยยคั็บบบ555555 💕
+  </div>
+
+  <button class="next-btn" onclick="window.location.href='page3.html'">➜</button>
+</body>
+</html>

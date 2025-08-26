@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ง้อเด่กน่ารักกกก💖</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: "Prompt", sans-serif;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ===== พื้นหลังรูป 20 รูป ===== */
+    .bg-container { position: fixed; inset: 0; z-index: 0; }
+    .bg-container img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.15;
+    }
+    .bg-container img:nth-child(odd) { mix-blend-mode: screen; }
+
+    /* ===== เนื้อหาการ์ด ===== */
+    .card {
+      width: min(720px, 92vw);
+      background: rgba(255,255,255,0.9);
+      border-radius: 28px;
+      padding: 44px 28px 68px;         /* กันไม่ให้ปุ่มชิดขอบล่าง */
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      overflow: hidden;
+
+      /* จัดเลย์เอาต์ให้บาลานซ์ */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(20px, 5vh, 40px);     /* ระยะห่างระหว่างหัวข้อและปุ่ม */
+    }
+
+    h1 {
+      font-size: clamp(28px, 4.5vw, 42px);
+      line-height: 1.2;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;                       /* ห่างกำลังดี */
+      justify-content: center;
+      flex-wrap: wrap;
+      padding-top: 2px;
+      min-height: 72px;
+      padding-inline: 12px;            /* กันขอบซ้ายขวาเวลาโต */
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      transform-origin: top center;    /* โตลงล่าง ไม่ไปชนหัวข้อ */
+    }
+
+    #loveBtn {
+      background: linear-gradient(180deg, #ff4d88, #ff77a9);
+      color: #fff;
+      transform: scale(1.08);          /* เริ่มใหญ่แบบพอดี */
+      box-shadow: 0 8px 18px rgba(255, 77, 136, 0.35);
+    }
+    #noBtn {
+      background: #fff3f7;
+      color: #ff4d88;
+      border: 2px solid #ffd1e0;
+    }
+
+    /* มือถือ: เพิ่มพื้นที่ล่างอีกนิด */
+    @media (max-width: 420px) {
+      .card { padding: 40px 20px 72px; }
+      .buttons { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- พื้นหลังรูป 20 รูป -->
+  <div class="bg-container">
+    <img src="1.jpg" alt=""><img src="2.jpg" alt=""><img src="3.jpg" alt="">
+    <img src="4.jpg" alt=""><img src="5.jpg" alt=""><img src="6.jpg" alt="">
+    <img src="7.jpg" alt=""><img src="8.jpg" alt=""><img src="9.jpg" alt="">
+    <img src="10.jpg" alt=""><img src="11.jpg" alt=""><img src="12.jpg" alt="">
+    <img src="13.jpg" alt=""><img src="14.jpg" alt=""><img src="15.jpg" alt="">
+    <img src="16.jpg" alt=""><img src="17.jpg" alt=""><img src="18.jpg" alt="">
+    <img src="19.jpg" alt=""><img src="20.jpg" alt="">
+  </div>
+
+  <!-- เนื้อหาการ์ด -->
+  <main class="card">
+    <h1>รักเค้าม้ายยยยย 💗</h1>
+    <div class="buttons">
+      <button id="loveBtn">รักมากกกกก 💖</button>
+      <button id="noBtn">ม่ายยย 🙈</button>
+    </div>
+  </main>
+
+  <script>
+  const loveBtn = document.getElementById('loveBtn');
+  const noBtn = document.getElementById('noBtn');
+  let count = 0;
+  const maxShrinks = 3;
+
+  function resizeButtons() {
+    const loveScale = Math.min(1.08 + count * 0.30, 1.6);
+    const noScale   = Math.max(1 - count * 0.28, 0.25);
+    loveBtn.style.transform = `scale(${loveScale})`;
+    noBtn.style.transform   = `scale(${noScale})`;
+    document.querySelector('.buttons').style.gap = `${18 + count * 24}px`;
+    loveBtn.style.transformOrigin = 'top center';
+    noBtn.style.transformOrigin   = 'top center';
+  }
+
+  noBtn.addEventListener('click', () => {
+    if (count < maxShrinks) {
+      count++;
+      resizeButtons();
+      if (count === maxShrinks) {
+        noBtn.style.opacity = '0';
+        noBtn.style.pointerEvents = 'none';
+        setTimeout(() => { noBtn.style.display = 'none'; }, 240);
+      }
+    }
+  });
+
+  /* แก้ตรงนี้: กดแล้วไปหน้า love.html */
+  loveBtn.addEventListener('click', () => {
+    window.location.href = 'love.html';
+  });
+</script>
+
+</body>
+</html>
